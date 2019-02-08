@@ -1,0 +1,93 @@
+﻿<head>
+	<meta charset="utf-8" ></meta>
+	<link href="../style.css" rel="stylesheet">
+	<script>
+var pressed = [];
+	
+	function action1(){
+	document.getElementById('sloi1').style.zIndex="3";document.getElementById('sloi2').style.zIndex="2";document.getElementById('sloi3').style.zIndex="1"
+	}
+	function action2(){
+	document.getElementById('sloi1').style.zIndex="1";document.getElementById('sloi2').style.zIndex="3";document.getElementById('sloi3').style.zIndex="2";
+	}
+	function action3(){
+	document.getElementById('sloi1').style.zIndex="1";document.getElementById('sloi2').style.zIndex="2";document.getElementById('sloi3').style.zIndex="3";
+	}
+	function action4(){
+	document.getElementById('sloi1').style.zIndex="2";document.getElementById('sloi1').style.width="100px";document.getElementById('sloi2').style.zIndex="2";document.getElementById('sloi2').style.left="170px";document.getElementById('sloi2').style.width="150px";document.getElementById('sloi3').style.zIndex="1";
+	}
+	function actionShift(){
+		var dv=document.createElement("DIV"); 
+		dv.style.position="absolute";
+		dv.style.width=100+"px";
+		dv.style.height=30+"px";
+		dv.id="comment";
+		dv.style.backgroundColor="white";
+		dv.style.right=2+"px"; 
+		dv.style.top=2+"px"; 
+		dv.style.zIndex="6";
+		dv.innerHTML="Коментарий";
+		document.body.appendChild(dv); 
+	}
+	function actionCtrl(){
+	document.getElementById('comment').remove()
+	}
+	function help(){
+		alert("по событию 1 показать только первый слой"+
+						"по событию 2 показать только второй слой"+
+						"по событию 3 показать только третий слой"+
+						"по событию 4 показать одновременно два слоя, номера которых указаны в колонке Слои."+
+						"Используя свойство CSS display:"+
+						"по событию 5 – поместить в окно браузера комментарий или пояснение, касающееся одного из элементов веб-страницы;"+
+						"по событию 6 – удалить выведенные комментарий или пояснение."+
+						"Примечание: если событие 6 совпадает с событием 5, это означает, что оно заключается в повторном выполнении события 5."+
+						"По нажатию клавиши F1 вывести на экран подсказку (help) о назначении используемых клавиш.");
+	}
+function runOnKeys(e){
+var W = "W".charCodeAt(0);
+var n1 = "1".charCodeAt(0);
+var n2 = "2".charCodeAt(0);
+var n3 = "3".charCodeAt(0);
+var n4 = "4".charCodeAt(0);
+
+pressed.push(e.keyCode);
+    if ( pressed.indexOf(n1) != -1 && pressed.indexOf(W) != -1 ) {
+            action1();
+            pressed = [];
+    }
+    if ( pressed.indexOf(n2) != -1 && pressed.indexOf(W) != -1 ) {
+            action2();
+            pressed = [];
+    }
+    if ( pressed.indexOf(n3) != -1 && pressed.indexOf(W) != -1 ) {
+            action3();
+            pressed = [];
+    }
+    if ( pressed.indexOf(n4) != -1 && pressed.indexOf(W) != -1 ) {
+            action4();
+            pressed = [];
+    }
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('keydown', runOnKeys);
+window.addEventListener('keyup', function(e){
+    pressed = [];
+});
+});
+</script>
+</head>
+<body>
+<style>
+.s{
+position:absolute;width:300px;height:300px;
+}
+</style>
+<div class="lab s" id="sloi1" style="z-index:1;left:10px;top:10px;background-color:black;">
+<embed src="../media/mask.swf" width="100%" height="100%" type="application/x-shockwave-flash"></div>
+<div class="lab s" id="sloi2" style="z-index:2;position:absolute;left:20px;top:20px;background-color:white;">
+<p><a>Ссылка 1</a><a>Ссылка 2</a></p></div>
+<div class="lab s" id="sloi3" style="z-index:3;position:absolute;left:30px;top:30px;background-color:red;">
+<img src="../media/2.png" width="100%" ></img></div></body>

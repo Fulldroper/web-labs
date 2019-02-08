@@ -1,0 +1,48 @@
+<head>	<meta charset="utf-8" ></meta></head>
+<body style="background-color:white;"><div>
+	<ul id="lab12_ul" onmouseover="lab12_1_active()" onmouseout="lab12_1_not_active()" >
+	  <li>текст</li>
+	  <li>текст</li>
+	  <li>текст</li>
+	  <li>текст</li>
+	  <li>текст</li>
+	</ul>
+<script>
+var x=1, y=1,dx=1,posx=0,posy=0; 
+ function lab12_1_active(){
+ var el = document.getElementById("lab12_ul");
+ el.style.fontColor = "red";
+	el.style.width=50+"px";
+	el.style.height=90+"px";
+ }
+ function f(x){return (Math.pow(x,0.75)-15);}
+ function setDot(x,y,size){
+ var dv=document.createElement("DIV"); 
+dv.style.position="absolute";
+dv.style.width=size+"px";
+dv.style.height=size+"px";
+dv.style.backgroundColor="black";
+dv.style.left=(x+87)+"px"; 
+dv.style.top=(y+14)+"px"; 
+document.body.appendChild(dv); 
+}
+ function lab12_1_not_active(){
+	var el = document.getElementById("lab12_ul");
+	el.style.position ="absolute";
+	el.style.backgroundColor="red";
+	el.style.width=50+"px";
+	el.style.height=90+"px";
+	el.style.left=x+"px"; 
+	el.style.top=y+"px"; 
+	document.body.appendChild(el); 
+	
+	if(posx == 0 && (x+dx) < innerWidth-90){if((x+92) >= innerWidth){posx=1;}else{x+=dx;}}
+	if(posy == 0 && (y+dx) < innerHeight-110){if((y+112) >= innerHeight){posy=1;}else{y=f(x);}}
+
+	if(posx == 1){if(x == 1){posx=0;}else{x-=dx;}}
+	if(posy == 1){if(y == 1){posy=0;}else{y="-"+f(x);}}
+	
+	setDot(x,y,1)
+	setTimeout("lab12_1_not_active()",50);
+}
+</script></div></body>
